@@ -9,6 +9,7 @@ let routes = app => {
   router.post("/upload", uploadController.uploadFiles);
   router.get("/files", uploadController.getListFiles);
   router.get("/files/:name", uploadController.download);
+  router.delete('/files/:id', uploadController.deleteFile);
 
   return app.use("/", router);
 };

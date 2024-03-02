@@ -1,8 +1,9 @@
 const upload = require("../middleware/upload");
 const dbConfig = require("../config/db");
+const mongodb = require("mongodb"); // This line is added to import the mongodb package
 
-const MongoClient = require("mongodb").MongoClient;
-const GridFSBucket = require("mongodb").GridFSBucket;
+const MongoClient = mongodb.MongoClient;
+const GridFSBucket = mongodb.GridFSBucket;
 
 const url = dbConfig.url;
 
@@ -54,6 +55,31 @@ const uploadFiles = async (req, res) => {
   }
 };
 
+const deleteFile = async (req, res) => {
+  try {
+    await mongoClient.connect();
+
+    const database = mongoClient.db(dbConfig.database);
+    const bucket = new GridFSBucket(database, {
+      bucketName: dbConfig.imgBucket,
+    });
+
+    const fileId = new mongodb.ObjectId(req.params.id); // Convert to ObjectId
+
+    bucket.delete(fileId, (err) => {
+      if (err) {
+        return res.status(404).send({ message: "File not found" });
+      }
+      res.status(200).send({ message: "File deleted successfully" });
+    });
+  } catch (error) {
+    return res.status(500).send({
+      message: error.message,
+    });
+  }
+};
+
+
 const getListFiles = async (req, res) => {
   try {
     await mongoClient.connect();
@@ -72,6 +98,7 @@ const getListFiles = async (req, res) => {
     let fileInfos = [];
     await cursor.forEach((doc) => {
       fileInfos.push({
+        id: doc._id, // Include the file's MongoDB _id
         name: doc.filename,
         url: baseUrl + doc.filename,
       });
@@ -84,6 +111,7 @@ const getListFiles = async (req, res) => {
     });
   }
 };
+
 
 const download = async (req, res) => {
   try {
@@ -118,4 +146,5 @@ module.exports = {
   uploadFiles,
   getListFiles,
   download,
+  deleteFile, // Make sure to export the deleteFile function
 };
