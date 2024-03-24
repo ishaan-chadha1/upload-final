@@ -4,7 +4,8 @@
   "description": "Node.js upload multiple files/images to MongoDB Demo",
   "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/server.js",
+    "build": "echo 'No build needed.'" 
   },
   "keywords": [
     "node",
