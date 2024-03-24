@@ -11,7 +11,4 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 initRoutes(app);
 
-let port = 8080;
-app.listen(port, () => {
-  console.log(`Running at localhost:${port}`);
-});
+module.exports = app; // Export the app
