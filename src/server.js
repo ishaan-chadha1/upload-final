@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const initRoutes = require("./routes");
 
-app.use(cors({ origin: "*" })); // Adjust the CORS policy as needed for your deployment
+app.use(cors()) // Adjust the CORS policy as needed for your deployment
 app.use(express.urlencoded({ extended: true }));
 initRoutes(app);
 
