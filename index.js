@@ -11,10 +11,10 @@ module.exports = app;
 
 
 // Add this to the end of your server.js for local development only
-// const port = process.env.PORT || 8080;
-// if (process.env.NODE_ENV !== 'production') {
-//   app.listen(port, () => {
-//     console.log(`Running at localhost:${port}`);
-//   });
-// }
+const port = process.env.PORT || 8080;
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(port, () => {
+    console.log(`Running at localhost:${port}`);
+  });
+}
 
