@@ -1,7 +1,7 @@
 const cors = require("cors");
 const express = require("express");
 const app = express();
-const initRoutes = require("./src/routes");
+const initRoutes = require("./routes");
 
 app.use(cors()); // Adjust the CORS policy as needed for your deployment
 app.use(express.urlencoded({ extended: true }));
