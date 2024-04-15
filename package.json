@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "Node.js upload multiple files/images to MongoDB Demo",
   "main": "src/index.js",
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "start": "node index.js",
-    "build": "echo 'No build needed.'" 
+    "build": "rm -rf dist && ./node_modules/.bin/babel . --out-dir dist --ignore node_modules --copy-files",
+    "test": "echo \"Error: no test specified\" && exit 1" 
   },
   "keywords": [
     "node",
